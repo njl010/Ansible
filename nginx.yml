@@ -1,0 +1,15 @@
+  - name: nginx Installation
+    hosts: all
+    tasks:
+      - name: Installed
+        package: 
+          name: nginx
+          state: present
+      - name: started
+        service:
+          name: nginx
+          enabled: yes
+          state: started
+
+
+

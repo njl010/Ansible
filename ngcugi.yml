@@ -1,0 +1,14 @@
+ - name: installation of nginx, docker & git 
+   hosts: all
+   tasks: 
+   - name: install nginx, docker, git
+     package: 
+        name: nginx, git-all, docker.service
+        state: present
+     service: 
+        name: docker.service
+        enabled: yes
+        state: started
+
+
+

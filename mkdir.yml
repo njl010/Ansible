@@ -1,0 +1,9 @@
+  - name: make a directory
+    hosts: all
+    tasks:
+      - name: directory
+        file:
+          name: student
+          state: absent
+
+        

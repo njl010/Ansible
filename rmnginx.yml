@@ -1,0 +1,13 @@
+  - name: nginx uninstall
+    hosts: all
+    tasks:
+      - name: nginx
+        service:
+          name: nginx
+          enabled: no
+          state: stopped
+      - name: nginx
+        package:
+          name: nginx
+          state: absent
+

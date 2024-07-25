@@ -1,0 +1,9 @@
+---
+- name: Change file permissions using shell command
+  hosts: all    
+  become: yes 
+
+  tasks:
+    - name: Change file permissions
+      shell: chmod 0644 /home/njl/Ansible/invent.yml   # Replace with the path to your file and desired permissions
+

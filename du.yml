@@ -1,0 +1,7 @@
+---
+- name: disk usage
+  hosts: all
+  tasks:
+    - name: Run du command
+      shell: du
+

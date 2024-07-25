@@ -1,0 +1,8 @@
+---
+  - name: permission of a file
+    hosts: all
+    tasks:
+      - name: permission
+        shell: id
+        
+
