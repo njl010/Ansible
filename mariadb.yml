@@ -1,0 +1,13 @@
+---
+  - name: installing mariadb
+    hosts: all
+    tasks:
+      - name: mariadb
+        package: 
+          name: mariadb-server
+          state: present
+      - name: mariadb
+        service:
+          name: mariadb
+          enabled: yes
+          state: started
