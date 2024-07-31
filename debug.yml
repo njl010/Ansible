@@ -1,0 +1,14 @@
+  - name: debug
+    hosts: dobbi2
+    tasks:
+      - name: print sysetem info
+        ansible.builtin.debug:
+          msg: |
+               "IP: {{ ansible_host }}"
+               "Hostname: {{ ansible_user }}"
+               "OS: {{ ansible_os_family }}"
+               "Cores: {{ ansible_processor_cores }}"
+               "Architecture: {{ ansible_architecture }}"
+            
+
+
