@@ -1,6 +1,6 @@
 ---
   - name: installing mariadb
-    hosts: all
+    hosts: dobbi2
     tasks:
       - name: mariadb
         package: 
@@ -11,3 +11,29 @@
           name: mariadb
           enabled: yes
           state: started
+
+      - name: installation of PyMySQL (dependency)
+        package:
+          name: python3-PyMySQL
+          state: present
+
+      - name: create a new database
+        mysql_db:
+          name: jab
+          state: present
+          login_unix_socket: /var/lib/mysql/mysql.sock     #must give this location when we create a database
+
+      - name: creating via community module
+        community.mysql.mysql_db:                    #for normal module, use mysql.mysql_db
+          name: galaxy
+          state: present
+          login_unix_socket: /var/lib/mysql/mysql.sock   #>>show databases;  
+
+      - name: creating user name with gypcy and a password 8787 with all database privillages
+        community.mysql.mysql_user:
+          name: gypcy
+          state: present
+          password: 8787
+          priv: '*.*:ALL'
+          login_unix_socket: /var/lib/mysql/mysql.sock   
+         
