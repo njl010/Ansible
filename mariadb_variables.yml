@@ -1,0 +1,50 @@
+---
+  - name: Mariadb sql playbook with variables
+    hosts: dobbi2
+    vars: 
+      name: Agusta
+      owner: Tornado
+      key: walhalla
+    tasks:
+
+    - name: mariadb installation
+      package:
+        name: mariadb-server
+        state: present
+
+    - name: enable and start
+      service:
+        name: mariadb
+        enabled: yes
+        state: started
+        
+    - name: Pymysql installation (dependency)
+      package:
+        name: python3-PyMySQL
+        state: present
+ 
+    - name: Create a new database
+      mysql_db:
+        name: "{{ name }}"
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+
+    - name: create new user 
+      mysql_user: 
+        name: "{{ owner }}"
+        state: present
+        password: "{{ key }}"
+        priv: '*.*:ALL'
+        login_unix_socket: /var/lib/mysql/mysql.sock
+
+    - name: print system info
+      debug: 
+        var: name
+
+    - name: print system info
+      debug: 
+        var: owner
+
+    - name: print system info
+      debug: 
+        var: key
