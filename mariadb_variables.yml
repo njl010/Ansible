@@ -28,6 +28,7 @@
         name: "{{ name }}"
         state: present
         login_unix_socket: /var/lib/mysql/mysql.sock
+      register: out
 
     - name: create new user 
       mysql_user: 
@@ -36,14 +37,15 @@
         password: "{{ key }}"
         priv: '*.*:ALL'
         login_unix_socket: /var/lib/mysql/mysql.sock
+      register: oman
 
     - name: print system info
       debug: 
-        var: name
+        var: out
 
     - name: print system info
       debug: 
-        var: owner
+        var: oman
 
     - name: print system info
       debug: 
