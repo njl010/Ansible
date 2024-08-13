@@ -1,0 +1,22 @@
+---
+- name: Install and configure PostgreSQL
+  hosts: all
+  tasks:
+    - name: Install PostgreSQL server package
+      package:
+        name: postgresql-server
+        state: present
+
+    - name: Initialize PostgreSQL database
+      command: postgresql-setup --initdb
+      become: yes
+
+    - name: Start and enable PostgreSQL service
+      service:
+        name: postgresql
+        enabled: yes
+        state: started
+      become: yes
+
+      
+      

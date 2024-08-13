@@ -1,0 +1,32 @@
+---
+  - name: Installation of HTTPD
+    hosts: dobbi1
+    tasks:
+    - name: httpd
+      tags: in
+      package: 
+        name: httpd
+        state: present
+
+    - name: httpd
+      tags: sat
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+      when: ( ansible_disstribution == "debian" ) 
+
+    - name: httpd
+      tags: stp
+      service:
+        name: httpd
+        enabled: no
+        state: stopped
+
+    - name: httpd
+      tags: uin
+      package: 
+        name: httpd
+        state: absent
+
+      

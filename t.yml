@@ -1,0 +1,12 @@
+---
+  - name: introduction to template
+    hosts: dobbi1
+    tasks:
+      - name: template module
+        ansible.builtin.template:
+          src: template.j2
+          dest: /home/njl/jinja.conf
+          owner:
+          group:
+          mode:
+

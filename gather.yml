@@ -1,0 +1,12 @@
+---
+  - name: gathering facts
+    hosts: gp1
+    tasks:
+      - name: gathering facts
+        setup:
+          filter: "architectur*" #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>for a spesific module  | grep
+        register: fun
+
+      - name: bla blaa
+        debug:
+          var: fun

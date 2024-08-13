@@ -25,6 +25,7 @@ all:
       ansible_become: yes
       ansible_become_method: sudo 
       ansible_ become_pass: asd123.
+      ansible_ssh_pass: asd123. #for two-step-verification -kK
 
   children:
     gp1:

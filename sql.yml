@@ -4,4 +4,5 @@
      - name: mysql
        package: 
         name: mysql-server
-        state: present
+        state: absent
+        
