@@ -1,0 +1,4 @@
+root: /var/www/html/site1
+errorlog: /var/log/nginx/error.log
+accesslog: /var/log/nginx/acces.log
+

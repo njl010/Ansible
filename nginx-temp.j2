@@ -1,0 +1,11 @@
+server
+{
+  listen 70;
+  server_name {{ansible_hostname}};
+  root /var/www/html/site1;
+  index index.html;
+
+  error_log {{errorlog}};
+  access_log {{accesslog}};
+}
+

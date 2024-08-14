@@ -12,15 +12,28 @@
           enabled: yes
           state: started
 
-      - name: copy the HTML file 
-        copy:
-          src: /home/njl/css1
-          dest: /usr/share/nginx/html
+      - name: SElinux
+        ansible.posix.selinux: 
+          policy: targeted
+          state: disabled
 
-      - name: restart the service
-        package: 
+           #- name: copy the HTML file 
+           #copy:
+           #src: /home/njl/css1
+           #dest: /usr/share/nginx/html
+
+      - name: through templates
+        ansible.builtin.template:
+          src: /home/njl/Ansible/nginx-temp.j2
+          dest: /etc/nginx/conf.d/colombo.conf
+        notify: hooya
+
+    handlers: 
+      - name: hooya 
+        service: 
           name: nginx
-          state: restarted
+          state: reloaded
+       
 
 
 
