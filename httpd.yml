@@ -2,33 +2,46 @@
   - name: Installation of HTTPD
     hosts: dobbi1
     tasks:
-    - name: httpd
-      tags: in
+    - name: httpd install
+      tags: install
       package: 
         name: httpd
         state: present
 
-    - name: httpd
+    - name: httpd enable
       tags: sat
       service:
         name: httpd
         enabled: yes
         state: started
+
+    - name: ideda firewall
+      ansible.builtin.firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+
+    - name: SE my
+      selinux: 
+        state: disabled
+
           #when: ( ansible_disstribution == "debian" ) 
+    - name: copy the css 
+      copy: 
+        src: /home/njl/Ansible/jogo
+        dest: /var/www/html/
 
-    - name: httpd
-      tags: 
-          - stp
-          - term
-      service:
+    - name: copy temp
+      template: 
+        src: /home/njl/Ansible/httpd-temp.j2
+        dest: /etc/httpd/conf.d/marco.conf
+
+    - name: restart firewall
+      service: 
+        name: firewalld
+        state: restarted
+
+    - name: restart httpd
+      service: 
         name: httpd
-        enabled: no
-        state: stopped
-
-    - name: httpd
-      tags: uin
-      package: 
-        name: httpd
-        state: absent
-
-      
+        state: restarted

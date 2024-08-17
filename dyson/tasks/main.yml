@@ -1,0 +1,43 @@
+---
+# tasks file for dyson
+- name: Installed
+  package:
+    name: nginx
+    state: present
+
+- name: started
+  service:
+    name: nginx
+    enabled: yes
+    state: started
+
+- name: SElinux
+  ansible.builtin.selinux:
+     policy: targeted
+     state: permissive
+
+- name: firewall configuration
+  ansible.builtin.firewalld:
+     port: 80/tcp
+     permanent: true
+     state: enabled
+
+- name: restart firewall
+  service:
+    name: firewalld
+    state: restarted
+  
+- name: copy conf. file
+  copy:
+     src: kyojiro
+     dest: "{{path}}"
+     owner: nginx
+     group: nginx
+     mode: u=rw,g=r,o=r
+
+- name: through templates
+  ansible.builtin.template:
+     src: gypsy.j2
+     dest: "{{tap}}"
+  notify: hrs   
+

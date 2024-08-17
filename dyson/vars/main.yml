@@ -1,0 +1,8 @@
+---
+# vars file for dyson
+
+path: /var/www/html/siteF/kyojiro
+tap: /etc/nginx/conf.d/kujak.conf
+errorlog: /var/log/nginx/error.log
+accesslog: /var/log/nginx/access.log
+ansible_hostname: server_name

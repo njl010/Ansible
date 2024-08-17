@@ -1,0 +1,11 @@
+---
+# handlers file for dyson
+
+- name: restart nginx
+  service: 
+    name: nginx
+    state: restarted
+  listen: hrs
+
+
+

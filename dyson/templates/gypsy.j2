@@ -2,7 +2,7 @@ server
 {
   listen 80;
   server_name {{ansible_hostname}};
-  root {{root}};
+  root {{path}};
   index index.html;
 
   error_log {{errorlog}};

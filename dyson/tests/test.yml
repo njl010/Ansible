@@ -1,0 +1,5 @@
+---
+- hosts: dobbi2
+  remote_user: root
+  roles:
+      - /home/njl/Ansible/dyson

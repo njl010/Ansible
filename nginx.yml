@@ -1,3 +1,4 @@
+---
   - name: nginx Installation
     hosts: dobbi2
     tasks:
@@ -13,9 +14,28 @@
           state: started
 
       - name: SElinux
-        ansible.posix.selinux: 
+        ansible.builtin.selinux: 
           policy: targeted
-          state: disabled
+          state: permissive
+
+      - name: firewall configuration
+        ansible.builtin.firewalld:
+          service: http
+          permanent: true
+          state: enabled
+
+      - name: restart firewall
+        service:
+          name: firewalld
+          state: restarted
+        
+      - name: copy conf. file
+        copy: 
+          src: /home/njl/Ansible/gojo1 
+          dest: /var/www/html/siteG
+          owner: nginx
+          group: nginx
+          mode: u=rw,g=r,o=r
 
            #- name: copy the HTML file 
            #copy:
@@ -28,13 +48,9 @@
           dest: /etc/nginx/conf.d/colombo.conf
         notify: hooya
 
-    handlers: 
+    handlers:
       - name: hooya 
         service: 
           name: nginx
-          state: reloaded
-       
-
-
-
+          state: restarted
 
